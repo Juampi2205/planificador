@@ -1,0 +1,143 @@
+/* styles/global.css */
+/* Fuentes: se cargan desde public/index.html */
+
+:root {
+  --bg-primary: #0A0E1A;
+  --bg-secondary: #111827;
+  --bg-card: #161D2F;
+  --bg-card-hover: #1E2840;
+  --border: #1F2D4A;
+  --border-light: #2A3A5C;
+
+  --accent: #4F8EF7;
+  --accent-dark: #2563EB;
+  --accent-glow: rgba(79, 142, 247, 0.15);
+
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+
+  --text-primary: #E8EDF5;
+  --text-secondary: #8A9BC0;
+  --text-muted: #4A5568;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 30px rgba(79, 142, 247, 0.1);
+
+  --font: 'Sora', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
+
+/* Inputs base */
+input, select, textarea {
+  font-family: var(--font);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 14px;
+  width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+input::placeholder { color: var(--text-muted); }
+
+/* Buttons base */
+button {
+  font-family: var(--font);
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(79, 142, 247, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(79, 142, 247, 0.25); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.fade-in { animation: fadeIn 0.35s ease forwards; }
+
+/* Card base */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Foco visible para navegación con teclado */
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button:disabled { cursor: not-allowed; }
+
+/* ── Responsive ──────────────────────────────────────────────
+   Los componentes usan estilos inline; estas clases los adaptan
+   en pantallas chicas (por eso el !important). */
+@media (max-width: 860px) {
+  .grid-ruleta { grid-template-columns: 1fr !important; }
+  .grid-2 { grid-template-columns: 1fr !important; }
+  .nav-label, .nav-brand { display: none; }
+}
+
+@media (max-width: 640px) {
+  .page { padding: 20px 16px !important; }
+  .grid-stats { grid-template-columns: 1fr !important; }
+  .grid-dias { grid-template-columns: repeat(4, 1fr) !important; }
+  .grid-semana {
+    grid-template-columns: repeat(7, minmax(120px, 1fr)) !important;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  .cta { flex-direction: column; align-items: stretch !important; }
+}
